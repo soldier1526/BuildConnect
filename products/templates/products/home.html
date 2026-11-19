@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Connect | Construction Marketplace</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f6f8;
+            color: #222;
+        }
+
+        header {
+            background: #172b4d;
+            color: white;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+            color: #ffb52e;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #ffb52e;
+        }
+
+        .hero {
+            background: linear-gradient(120deg, #172b4d, #315477);
+            color: white;
+            padding: 85px 7%;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 28px;
+        }
+
+        .search {
+            max-width: 620px;
+            margin: auto;
+            display: flex;
+        }
+
+        .search input {
+            flex: 1;
+            min-width: 0;
+            padding: 16px;
+            border: none;
+            border-radius: 6px 0 0 6px;
+        }
+
+        .search button {
+            padding: 15px 25px;
+            background: #ffb52e;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .container {
+            padding: 50px 7%;
+        }
+
+        .container h2 {
+            color: #172b4d;
+            margin-bottom: 25px;
+            font-size: 27px;
+        }
+
+        .categories, .products, .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px 18px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 3px 14px #00000012;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 7px 20px #00000020;
+        }
+
+        .emoji {
+            font-size: 43px;
+        }
+
+        .card h3 {
+            margin: 13px 0;
+            color: #172b4d;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .price {
+            color: #16804a;
+            font-weight: bold;
+            margin: 13px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #172b4d;
+            color: white;
+            border: none;
+            padding: 11px 19px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #ffb52e;
+            color: #172b4d;
+        }
+
+        .highlight {
+            background: #e9eef5;
+        }
+
+        footer {
+            background: #172b4d;
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+            line-height: 1.8;
+        }
+
+        @media(max-width: 600px) {
+            header {
+                flex-direction: column;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 13px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .search button {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🏗️ Build Connect</div>
+
+    <nav>
+    <a href="/">Home</a>
+    <a href="#categories">Materials</a>
+    <a href="#services">Services</a>
+    <a href="#builders">Builders</a>
+    <a href="#contact">Contact</a>
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'signup' %}">Sign Up</a>
+    {% endif %}
+</nav>
+</header>
+
+<section class="hero">
+    <h1>Build Your Dreams With the Right Connections</h1>
+
+    <p>
+        Buy construction materials and connect with builders
+        and contractors at one place.
+    </p>
+
+    <div class="search">
+        <input type="text"
+            placeholder="Search cement, steel, bricks...">
+        <button type="button">Search</button>
+    </div>
+</section>
+
+<section class="container" id="services">
+    <h2>What Are You Looking For?</h2>
+
+    <div class="services">
+
+        <div class="card">
+            <div class="emoji">🧱</div>
+            <h3>Buy Materials</h3>
+            <p>Find construction materials for your project.</p>
+            <a href="#products" class="btn">Explore Products</a>
+        </div>
+
+        <div class="card">
+            <div class="emoji">🏪</div>
+            <h3>Sell Materials</h3>
+            <p>Showcase your products to potential customers.</p>
+            <a href="#contact" class="btn">Get Started</a>
+        </div>
+
+        <div class="card" id="builders">
+            <div class="emoji">👷</div>
+            <h3>Find Builders</h3>
+            <p>Connect with builders for your construction work.</p>
+            <a href="#contact" class="btn">Find Professionals</a>
+        </div>
+
+        <div class="card">
+            <div class="emoji">🛠️</div>
+            <h3>Hire Contractors</h3>
+            <p>Discover professionals for construction services.</p>
+            <a href="#contact" class="btn">Explore Services</a>
+        </div>
+
+    </div>
+</section>
+
+<section class="container highlight" id="categories">
+    <h2>Shop By Categories</h2>
+
+    <div class="categories">
+        <div class="card">
+            <div class="emoji">🏗️</div>
+            <h3>Cement</h3>
+        </div>
+
+        <div class="card">
+            <div class="emoji">🔩</div>
+            <h3>Steel</h3>
+        </div>
+
+        <div class="card">
+            <div class="emoji">🧱</div>
+            <h3>Bricks</h3>
+        </div>
+
+        <div class="card">
+            <div class="emoji">🏖️</div>
+            <h3>Sand</h3>
+        </div>
+
+        <div class="card">
+            <div class="emoji">🎨</div>
+            <h3>Paints</h3>
+        </div>
+
+        <div class="card">
+            <div class="emoji">🚿</div>
+            <h3>Plumbing</h3>
+        </div>
+    </div>
+</section>
+
+<section class="container" id="products">
+    <h2>Popular Products</h2>
+
+    <div class="products">
+
+        <div class="card">
+            <div class="emoji">🏗️</div>
+            <h3>OPC Cement</h3>
+            <p>50 KG Bag</p>
+            <div class="price">₹380 / Bag</div>
+            <button class="btn">View Product</button>
+        </div>
+
+        <div class="card">
+            <div class="emoji">🔩</div>
+            <h3>TMT Steel</h3>
+            <p>High Quality Steel</p>
+            <div class="price">₹65 / KG</div>
+            <button class="btn">View Product</button>
+        </div>
+
+        <div class="card">
+            <div class="emoji">🧱</div>
+            <h3>Red Bricks</h3>
+            <p>Premium Quality</p>
+            <div class="price">₹8 / Piece</div>
+            <button class="btn">View Product</button>
+        </div>
+
+        <div class="card">
+            <div class="emoji">🏖️</div>
+            <h3>Construction Sand</h3>
+            <p>Fine Quality</p>
+            <div class="price">₹1,500 / Ton</div>
+            <button class="btn">View Product</button>
+        </div>
+
+    </div>
+</section>
+
+<footer id="contact">
+    <h2>Build Connect</h2>
+    <p>Building Your Dreams, One Connection at a Time.</p>
+    <p>Connect with us for construction materials and services.</p>
+    <p>© 2026 Build Connect | All Rights Reserved</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+/db.sqlite3
+/venv/
+_pycache_/
+*.pyc
+- Copy.
+.env

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Build Connect</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .signup-box {
+            background: white;
+            padding: 35px;
+            width: 340px;
+            border-radius: 12px;
+            box-shadow: 0 4px 18px #0002;
+        }
+
+        h2 {
+            color: #172b4d;
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #172b4d;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        a {
+            color: #172b4d;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="signup-box">
+        <h2>🏗️ Build Connect</h2>
+        <h3>Create Your Account</h3>
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <p>Already have an account?
+            <a href="{% url 'login' %}">Login</a>
+        </p>
+    </div>
+</body>
+</html>
